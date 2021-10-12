@@ -1,0 +1,135 @@
+body{
+  background: #f4f5f7;
+  margin-top:20px;
+}
+.cart-container {
+border: 1px solid rgba(0, 0, 0, 0.05);
+padding: 30px;
+}
+.cart-container .cart-body {
+border-top: 1px solid rgba(0, 0, 0, 0.05);
+border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+padding: 30px 0 20px;
+margin: 10px 0 20px;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.socialbox {
+font-family: "Open Sans";
+font-weight: 300;
+font-size: 30px;
+display: inline-block;
+text-decoration: none;
+color: white;
+padding-left: 5px;
+padding: 15px 0px;
+width: 265px;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 4px, rgba(0, 0, 0, 0.22) 0px 3px 6px;
+}
+
+a.socialbox.facebook {
+background-color: #2980b9;
+-webkit-transition: background-color 0.25s ease-in-out;
+transition: background-color 0.25s ease-in-out;
+}
+a.socialbox.microsoft {
+background-color: #05A6F0;
+-webkit-transition: background-color 0.25s ease-in-out;
+transition: background-color 0.25s ease-in-out;
+}
+a.socialbox.salestracker {
+background-color: #75BA4D;
+-webkit-transition: background-color 0.25s ease-in-out;
+transition: background-color 0.25s ease-in-out;
+}
+a.socialbox.linkedin {
+background-color: #0073B1;
+-webkit-transition: background-color 0.25s ease-in-out;
+transition: background-color 0.25s ease-in-out;
+}
+
+label{
+  font-weight: 500;
+}
+
+a.socialbox .social-icon {
+line-height: 32px;
+font-size: 30px;
+display: inline-block;
+vertical-align: middle;
+border-right: 1px solid rgba(255, 255, 255, 0.25);
+padding-right: 15px;
+}
+
+a.socialbox .description {
+display: inline-block;
+vertical-align: middle;
+padding-left: 10px;
+font-size: 13px;
+}
+
+a.socialbox .description span {
+display: block;
+line-height: 16px;
+}
+
+.card-block:hover{
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.384);
+    border-radius: 5px;    
+}
+
+body{
+  margin-top:20px;
+  background:#FAFAFA;
+}
+.order-card {
+  color: #fff;
+}
+
+.bg-c-blue {
+  background: linear-gradient(45deg,#1877F2,#0099FF);
+}
+
+.bg-c-green {
+  background: linear-gradient(45deg,#00BF6F,#00ff95);
+}
+
+.bg-c-yellow {
+  background: linear-gradient(45deg,#0077b5,#5798ff);
+}
+
+.bg-c-pink {
+  background: linear-gradient(45deg,#00A4EF,#66c9ff);
+}
+
+
+.card {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+  box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.card .card-block {
+  padding: 25px;
+}
+
+.order-card i {
+  font-size: 26px;
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}

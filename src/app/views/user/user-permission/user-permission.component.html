@@ -1,0 +1,68 @@
+<alert></alert>
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Manage <b> User Permission</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a routerLink="/user/add-user" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i><span>Add New Permission</span></a>
+                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o" aria-hidden="true"></i> <span>Delete</span></a>
+                    </div>
+                </div>
+            </div>
+            <form id="rolePermissionForm">
+            <nav class="navbar navbar-light bg-light d-flex p-2">  
+                  <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+                  <alert></alert>
+                <div class="">
+                    <button type="button" (click)="savePermission('rolePermissionForm')" class="btn btn-outline-info">Save</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="addCheckbox()" >Cancel</button>
+                </div>
+              </nav>
+            <table class="table table-striped table-hover text-center">
+                <thead>
+                    <tr>
+                        <th class="">Permissions</th>
+                        <th *ngFor="let role of roles | keyvalue">{{role.key}} </th>
+                    </tr>
+                </thead>
+                <tbody ng-controller="ChckbxsCtrl">
+                    
+                    <tr *ngFor="let per of permissions | keyvalue">
+                        <td class="text-left pl-3">
+                            <strong>
+                               {{per.key}}
+                            </strong>
+                        </td>
+                        <td *ngFor="let role of roles | keyvalue; let i = index">
+                            <span class="custom-checkbox">
+                                <input type="checkbox" id="checkbox_{{role.value}}_{{per.value}}" name="{{per.value}}[{{role.value}}]" [checked]='isChecked[role.value+"_"+per.value]'>
+                                <label for="checkbox3"></label>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+                <div *ngFor="let check of isChecked">
+                    <span>{{check[0]}} hello</span>
+                </div>
+            </table>
+      
+            <div class="clearfix">
+                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link text-light">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

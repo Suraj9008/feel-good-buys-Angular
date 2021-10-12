@@ -1,0 +1,258 @@
+<alert></alert>
+<div class="example-header table-title row mt-2">
+    <div class="col-lg-4">
+        <h2>User Management List</h2>
+    </div>
+    <div class="col-lg-8">
+        <div class="d-flex flex-row-reverse">
+            <div class="pl-2">
+                <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </div>
+            <div class="">
+                <a class="btn btn-light text-dark" data-toggle="modal"><i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                Excel</a>
+            <a class="btn btn-light text-dark" data-toggle="modal"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                PDF</a>
+
+                <a routerLink="/user/add-user" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"
+                        aria-hidden="true"></i><span>Add New User</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> ID </b></mat-header-cell>
+            <mat-cell *matCellDef="let row;let i = index"> {{i+1}} </mat-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="userName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>User-Name</b> </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.userName}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="firstName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> First-Name </b> </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Last-Name </b> </mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.color]="row.phone"> {{row.lastName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Role </b> </mat-header-cell>
+          <mat-cell *matCellDef="let row" [style.color]="row.status">
+                {{row.role[0].item_text}}
+        </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Email </b> </mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.color]="row.status"> {{row.email}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="mobile">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Mobile </b> </mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.color]="row.status"> {{row.mobile}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Address </b> </mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.color]="row.status"> {{row.address}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="password">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Password </b> </mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.color]="row.status">
+                <a class="btn btn-warning" data-toggle="modal"><i class="fa fa-key" aria-hidden="true"></i></a>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Action </b> </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button class="btn btn-success" (click)="editForm(row)" data-toggle="modal"><i class="fa fa-pencil-square-o text-light" aria-hidden="true"></i></button>
+                &nbsp;&nbsp;
+
+                <button class="btn btn-danger" (click)="deleteUser(row._id, row.userName)" data-toggle="modal"><i class="fa fa-trash-o text-light" aria-hidden="true"></i></button>
+
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+<div id="openForm" class="modal fade docs-example-modal-lg " tabindex="-1" role="dialog"
+    aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content p-5">
+          <form class="form-horizontal" [formGroup]="productForm">
+            <div class="fieldset">
+              <h3 class="fieldset-title">Personal Info</h3>
+              <div class="form-group">
+                <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                  <img class="img-rounded img-responsive w-75"
+                    src="https://celeste.bold-themes.com/main-demo/wp-content/uploads/sites/3/2018/01/img-testimonials-career-04.jpg"
+                    alt=""/>
+                  <div class="form-group mt-2">
+                    <input type="file" formControlName="imageUrl" class="file-uploader pull-left" />
+                  </div>
+                </figure>
+                <div class="form-group p-2">
+                  <label class="control-label">User Id</label>
+                  <div class="">
+                    <input type="text" formControlName="userId" class="form-control" value="" readonly/>
+                  </div>
+                </div>
+                <div class="form-group p-2">
+                  <label class="control-label">User Name</label>
+                  <div class="">
+                    <input type="text" formControlName="userName" class="form-control" value="" />
+                  </div>
+                </div>
+                <div class="form-group d-flex flex-row">
+                  <div class="form-group p-2 w-50">
+                    <label class="control-label">First Name</label>
+                    <div class="">
+                      <input type="text" formControlName="firstName" class="form-control" value="Rebecca" />
+                    </div>
+                  </div>
+                  <div class="form-group p-2 w-50">
+                    <label class="control-label">Last Name</label>
+                    <div class="">
+                      <input type="text" formControlName="lastName" class="form-control" value="Sanders" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group p-2">
+              <label class="control-label">Info</label>
+              <div class="">
+                <textarea class="form-control" formControlName="info" id="exampleFormControlTextarea1"
+                  rows="3"></textarea>
+              </div>
+            </div>
+            <div class="card-body form-group">
+              <h3 class="fieldset-title">Contact Info</h3>
+              <div class="form-group d-flex flex-row">
+                <div class="form-group p-2 w-50">
+                  <label class="control-label">Mobile</label>
+                  <div class="">
+                    <input type="text" formControlName="mobile" class="form-control" value="Sanders" />
+                    <p class="help-block form-text">Enter Mobile No</p>
+                  </div>
+                </div>
+                <div class="form-group p-2 w-50">
+                  <label class="control-label">Address</label>
+                  <div class="">
+                    <input type="address" formControlName="address" class="form-control" />
+                    <p class="help-block form-text">Enter Address</p>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group d-flex flex-row">
+                <div class="form-group p-2 w-50">
+                  <label class="control-label">Email</label>
+                  <div class="">
+                    <input type="email" formControlName="email" class="form-control" value="Rebecca" />
+                    <p class="help-block form-text">Enter Email Address</p>
+                  </div>
+                </div>
+                <div class="form-group p-2 w-50">
+                  <label class="control-label">Password</label>
+                  <div class="">
+                    <input type="password" formControlName="password" class="form-control" autocomplete="on" />
+                    <p class="help-block form-text">Enter Password</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label">Security Questions</label>
+                    <select formControlName="question" class="custom-select custom-select-md"
+                      aria-label=".form-select-md example">
+                      <option class="hidden" selected>
+                        Please select your Sequrity Question
+                      </option>
+                      <option>What is your Birthdate?</option>
+                      <option>What is Your old Phone Number</option>
+                      <option>What is your Pet Name?</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" formControlName="ans" class="form-control" placeholder="Answer *" value="" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label">Security Questions</label>
+                  <ng-multiselect-dropdown class="custom-select-md" [placeholder]="'Select Role'" [settings]="dropdownSettings"
+                    [data]="dropdownList" [(ngModel)]="selectedItems" formControlName="role"
+                    (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    (onDeSelect)="onItemDeSelect($event)"
+                    (onDeSelectAll)="onUnSelectAll()">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="container fieldset-title">
+              <div class="row">
+                <h3 class="fieldset-title">Social Media</h3>
+                <div class="col-lg-12" #socialField>
+                  <div class="clearfix">
+                    <button type="button" class="btn btn-success float-right" (click)="addUser()">Add Social Media Name</button>
+                  </div>
+                  <div class="mt-3" formArrayName="socialMedia">
+                    <div class="container user-container" *ngFor="let socialMedia of productForm.controls.socialMedia.controls; let i = index" formGroupName="{{i}}">
+                      <div class="row">
+                        <div class="col-lg-5">
+                          <label class="control-label">Social Media Name</label>
+                          <select formControlName="socialMediaName"class="custom-select custom-select-md" aria-label=".form-select-md example">
+                            <option selected> Select Social Media Name</option>
+                            <option >{{i}}</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-5">
+                          <label class="control-label"> Username</label>
+                          <input type="text" class="form-control" formControlName="Username" placeholder="Enter Social Media Name">
+                        </div>
+                        <div class="col-lg-2 mt-4">
+                          <button class="btn btn-danger" *ngIf="productForm.controls.socialMedia.controls.length > 1" type="button" (click)="deleteMedia(i)">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-3">
+              <div class="form-group d-flex flex-row">
+                <div class="form-group p-2">
+                  <button type="submit" (click)="updateUsers()" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="form-group p-2">
+                  <button (click)="clrData()" class="btn btn-danger">Clear Form</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->
