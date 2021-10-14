@@ -99,13 +99,16 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <label class="control-label">Security Questions</label>
+                  <label class="control-label">Select Role</label>
                   <ng-multiselect-dropdown class="custom-select-md" [placeholder]="'Select Role'" [settings]="dropdownSettings"
                     [data]="dropdownList" [(ngModel)]="selectedItems" formControlName="role"
                     (onSelect)="onItemSelect($event)"
                     (onSelectAll)="onSelectAll($event)"
                     (onDeSelect)="onItemDeSelect($event)"
                     (onDeSelectAll)="onUnSelectAll()">
+                    <ng-template ng-option-tmp let-item="dropdownList">
+                      {{item | titlecase | showOnTable}}
+                   </ng-template>
                   </ng-multiselect-dropdown>
                 </div>
               </div>

@@ -1,5 +1,6 @@
+import { TitleCasePipe } from "@angular/common";
 import { Component, OnInit,OnChanges, SimpleChanges } from "@angular/core";
-
+import { TranformPipe } from '../../../_pipe/tranform.pipe'
 import {
   FormGroup,
   FormControl,
@@ -8,6 +9,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { ShowOnTablePipe } from "../../../_pipe/show-on-table.pipe";
 import { AlertService, AuthenticationService, UserService } from "../../../_services";
 import { TaxonomyService } from "../../taxonomy.service";
 
@@ -18,7 +20,8 @@ let emailRegex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$";
   templateUrl: "./add-user.component.html",
   styleUrls: ["./add-user.component.scss"],
   providers: [
-    { provide: AuthenticationService, useClass: AuthenticationService },
+    { provide: AuthenticationService, useClass: AuthenticationService,},
+    TitleCasePipe,TranformPipe
   ],
 })
 export class AddUserComponent implements OnInit {
@@ -97,10 +100,14 @@ export class AddUserComponent implements OnInit {
       let roles = data.data
       roles.forEach((element: { roleName: string; }, index: any) => {
         let i = index;
-        let role:string = element.roleName
+        let rowData:string = element.roleName;
+        let titlePipe = new ShowOnTablePipe();
+        let title = new TitleCasePipe();
+        let role = title.transform(rowData)
+        let roleValue = titlePipe.transform(role);
         var obj:any={}
         obj.item_id = i
-        obj.item_text = role
+        obj.item_text = roleValue
         this.tempDropdown.push(obj);
         this.dropdownList = this.tempDropdown
       });
@@ -109,8 +116,8 @@ export class AddUserComponent implements OnInit {
       singlesSelection: false,
       idField: 'item_id',
       textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
+      // selectAllText: 'Select All',
+      // unSelectAllText: 'UnSelect All',
       itemsShowLimit: 2,
       // allowSearchFilter: true
     };
@@ -142,8 +149,10 @@ export class AddUserComponent implements OnInit {
     // reset alerts on submit
     this.alertService.clear();
     var val = this.productForm.value;
-    console.log(val, "product form");
-
+    let role = this.productForm.value.role[0].item_text;
+    let filter = new TranformPipe()
+    let newVal:any = filter.transform(role)
+    this.productForm.value.role[0].item_text = newVal.toLowerCase();
     if (this.productForm.invalid) {
       return;
     }

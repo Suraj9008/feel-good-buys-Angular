@@ -14,7 +14,7 @@
             <a class="btn btn-light text-dark" data-toggle="modal"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 PDF</a>
 
-                <a routerLink="/user/add-user" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"
+                <a routerLink="/home/user/add-user" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"
                         aria-hidden="true"></i><span>Add New User</span></a>
             </div>
         </div>
@@ -51,7 +51,7 @@
         <ng-container matColumnDef="role">
           <mat-header-cell *matHeaderCellDef mat-sort-header> <b> Role </b> </mat-header-cell>
           <mat-cell *matCellDef="let row" [style.color]="row.status">
-                {{row.role[0].item_text}}
+                {{row.role[0].item_text | titlecase | showOnTable}}
         </mat-cell>
         </ng-container>
         <ng-container matColumnDef="email">

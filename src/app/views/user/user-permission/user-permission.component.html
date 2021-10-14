@@ -26,7 +26,7 @@
                 <thead>
                     <tr>
                         <th class="">Permissions</th>
-                        <th *ngFor="let role of roles | keyvalue">{{role.key}} </th>
+                        <th *ngFor="let role of roles | keyvalue">{{role.value.item_text | titlecase | showOnTable}} </th>
                     </tr>
                 </thead>
                 <tbody ng-controller="ChckbxsCtrl">
@@ -39,7 +39,7 @@
                         </td>
                         <td *ngFor="let role of roles | keyvalue; let i = index">
                             <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox_{{role.value}}_{{per.value}}" name="{{per.value}}[{{role.value}}]" [checked]='isChecked[role.value+"_"+per.value]'>
+                                <input type="checkbox" id="checkbox_{{role.value.item_text}}_{{per.value}}" name="{{per.value}}[{{role.value.item_text}}]" [checked]='isChecked[role.value.item_text+"_"+per.value]'>
                                 <label for="checkbox3"></label>
                             </span>
                         </td>

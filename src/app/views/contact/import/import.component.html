@@ -9,11 +9,12 @@
               <div class="row justify-content-center">
                 <div class="col-lg-10 col-xl-12">
                   <div class="cart-container">
-                    <div class="d-flex">
+                    <div class="d-flex flex-row justify-content-between">
                       <label class=" control-label"><h2 style="display: inline-block;">Import Contacts</h2>&nbsp;<i class="fa fa-question-circle" data-bs-toggle="tooltip"
                         data-bs-placement="right"
                         title="You can import your existing contacts directly from Outlook.com, facebook.com, LinkedIn.com and SurveyMonkey.com ."
                         aria-hidden="true"></i></label>
+                        <button class="btn btn-outline-success p-2" (click)="showBulk()">Add Contact From Excel</button>
                     </div>
                     <hr>
                     <div class="container">
@@ -91,3 +92,79 @@
     </div>
   </div>
   
+
+
+  <div id="exampleModal" class="modal fade docs-example-modal-lg" tabindex="-1" role="dialog"
+    aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content p-2">
+          <div class="container popup-overlay" *ngIf="showSpinner">
+            <circle-progress [percent]="percent" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+              [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="percentage">
+            </circle-progress>
+            <p>{{percentage}}/{{noOfcount}} Contacts Stored</p>
+            <p>{{message}}</p>
+            <button class="btn btn-primary" (click)="closeLoader()">Close</button>
+          </div>
+          
+          <div class="container bg-white p-5">
+            <div *ngIf="isExcelFile === false">
+              <p class="alert alert-danger" role="alert">This is not an Excel file</p>
+            </div>
+            <div class="d-flex justify-content-center">
+              <input type="file" class="form-control w-75" #inputFile (change)="onFileChange($event)"/>
+              <button type="button" (click)="openConfirmationDialog()" class="btn btn-primary">Import Contact</button>
+            </div>
+            <div id="output"></div>
+            <hr>
+            <form #form="ngForm">
+              <table class="table">
+                <thead>
+                  <th>
+                    <strong>Contact Type Field</strong>
+                  </th>
+                  <th>
+                    <strong>Custom</strong>
+                  </th>
+                  <th>
+                    <strong>Webform Field</strong>
+                  </th>
+                  <th>
+                    <strong>Custom Text</strong>
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of addContact">
+                    <td > 
+                      <input class="form-control" id="key-{{item}}" name="key-{{item}}" #key type="text"
+                        [value]="item">
+                    </td>
+                    <td>
+                      <div class="form-check">
+                        <input (change)='toggleDisable($event,item)' class="form-check-input" id="check-{{item}}"
+                          name="check-{{item}}" #check type="checkbox" value="" id="flexCheckDefault">
+                        <label for="">Custom</label>
+                      </div>
+                    </td>
+                    <td>
+                      <select [disabled]='disableTextbox' class="form-select" id="select-{{item}}" [data-select]="item"
+                        name="select-{{item}}" #OptionValue aria-label="Default select example">
+                        <option [value]="null">please select option</option>
+                        <option *ngFor="let key of JsonData.Sheet1[0] | keyvalue "[value]="key.key" [class] = "item" [selected]="(key.key | lowercase) == (item | lowercase)? true:false">{{key.key}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="form-floating">
+                        <textarea class="form-control" id="textarea-{{item}}" name="textarea-{{item}}" #comments
+                          placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Custom Data</label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>

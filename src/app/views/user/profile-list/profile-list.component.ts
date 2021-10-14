@@ -6,6 +6,8 @@ import { AlertService, AuthenticationService, UserService } from '../../../_serv
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaxonomyService } from '../../taxonomy.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ShowOnTablePipe } from '../../../_pipe/show-on-table.pipe';
+import { TitleCasePipe } from '@angular/common';
 declare var jQuery: any;
 
 @Component({
@@ -110,10 +112,15 @@ getRolefromUserRole(){
     let roles = data.data
     roles.forEach((element: { roleName: string; }, index: any) => {
       let i = index;
-      let role:string = element.roleName
+      let rowData:string = element.roleName;
+      let titlePipe = new ShowOnTablePipe();
+      let title = new TitleCasePipe();
+      let role = title.transform(rowData)
+      let roleValue = titlePipe.transform(role);
+
       var obj:any={}
       obj.item_id = i
-      obj.item_text = role
+      obj.item_text = roleValue
       this.tempDropdown.push(obj);
       this.dropdownList = this.tempDropdown
     });

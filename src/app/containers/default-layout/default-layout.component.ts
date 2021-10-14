@@ -13,7 +13,11 @@ export class DefaultLayoutComponent implements OnInit {
 
   }
   
- 
+  logout(){
+    window.localStorage.clear();
+    window.location.reload();
+    window.location.replace('/');
+  }
   
   public sidebarMinimized = false;
   public navItems = navItems;

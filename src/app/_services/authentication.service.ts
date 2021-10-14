@@ -36,9 +36,9 @@ export class AuthenticationService {
   signIn(user:User) {
      this.http.post<any>(`${this.endpoint}/user/login`, user)
       .subscribe((res: any) => {
-        console.log(res.permisssion.permission);
+        console.log(res.myRole);
         localStorage.setItem('authToken', res.data.authToken);
-        localStorage.setItem('rolePermission',JSON.stringify(res.permisssion.permission))
+        localStorage.setItem('rolePermission',JSON.stringify(res.myRole))
         this.users = this.getUser(res.data.authToken)
           console.log(this.users, "user");
         // this.getUserProfile(res.data._id).subscribe((res) => {

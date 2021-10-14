@@ -5,7 +5,6 @@ export const navItems: INavData[] = [
     name: 'Dashboard',
     url: '/dashboard', ///dashboard
     icon: 'icon-speedometer',
-    role: ["user_read", "user_create", "user_update", "user_delete"],
     badge: {
       variant: 'info',
       text: 'NEW'
@@ -22,32 +21,36 @@ export const navItems: INavData[] = [
     name: "Company",
     url: '/company',
     icon: 'fa fa-building-o',
-    role: ["user_read", "user_create", "user_update", "user_delete"],
     children: [
       {
         name: 'Add Company',
         url: '/home/company/add-company',
-        icon: 'fa fa-plus-square-o'
+        icon: 'fa fa-plus-square-o',
+        permissions:["add_company"],
       },
       {
         name: 'Company List',
         url: '/home/company/company-list',
-        icon: 'fa fa-list-alt'
+        icon: 'fa fa-list-alt',
+        permissions:["add_company", "view_company", "update_company", "delete_company"]
       },
       {
         name: 'Edit Company',
         url: '/home/company/edit-company',
-        icon: 'fa fa-pencil-square-o'
+        icon: 'fa fa-pencil-square-o',
+        permissions:["update_company"]
       },
       {
         name: 'View Company Details',
         url: '/home/company/view-company-details',
-        icon: 'fa fa-newspaper-o'
+        icon: 'fa fa-newspaper-o',
+        permissions:["view_company"]
       },
       {
         name: 'Demo',
         url: '/home/company/demo',
-        icon: 'fa fa-newspaper-o'
+        icon: 'fa fa-newspaper-o',
+        permissions:["add_company", "view_company", "update_company", "delete_company"]
       }
     ]
   },
@@ -55,32 +58,36 @@ export const navItems: INavData[] = [
     name: "Contacts",
     url: '/home/contact',
     icon: 'fa fa-address-book-o',
-    role: ["user_read", "user_create", "user_update", "user_delete"],
     children: [
       {
         name: 'Add Contact',
         url: '/home/contact/add-contact',
-        icon: 'fa fa-plus-square-o'
+        icon: 'fa fa-plus-square-o',
+        permissions:["add_contact"]
       },
       {
         name: 'Contact List',
         url: '/home/contact/contact-list',
-        icon: 'fa fa-list-alt'
+        icon: 'fa fa-list-alt',
+        permissions:["view_contact", "add_contact", "update_contact", "delete_contact"]
       },
       {
         name: 'View Contact Details',
         url: '/home/contact/view-contact-details',
-        icon: 'fa fa-address-card-o'
+        icon: 'fa fa-address-card-o',
+        permissions:["view_contact"]
       },
       {
         name: 'Edit Contact',
         url: '/home/contact/edit-contact',
-        icon: 'fa fa-pencil-square-o'
+        icon: 'fa fa-pencil-square-o',
+        permissions:["update_contact"]
       },
       {
         name: "Import Contact",
         url: '/home/contact/import',
         icon: 'fa fa-cloud-download',
+        permissions:["view_contact", "add_contact", "update_contact", "delete_contact"]
       },
     ]
   },
@@ -88,32 +95,36 @@ export const navItems: INavData[] = [
     name: 'User',
     url: '/user',
     icon: 'icon-user',
-    role: ["user_read", "user_create", "user_update", "user_delete"],
     children: [
       {
         name: 'Add User',
         url: '/home/user/add-user',
-        icon: 'fa fa-user-plus'
+        icon: 'fa fa-user-plus',
+        permissions:["user_create",]
       },
       {
         name: 'User Profile List',
         url: '/home/user/profile-list',
-        icon: 'fa fa-list-alt'
+        icon: 'fa fa-list-alt',
+        permissions:["user_read", "user_create", "user_update", "user_delete"]
       },
       {
         name: 'Edit Profile',
         url: '/home/user/edit-profile',
-        icon: 'icon-people'
+        icon: 'icon-people',
+        permissions:["user_update"]
       },
       {
         name: 'User Role',
         url: '/home/user/user-role',
-        icon: 'icon-options'
+        icon: 'icon-options',
+        permissions:["user_read", "user_create", "user_update", "user_delete"]
       },
       {
         name: 'User Permission',
         url: '/home/user/user-permission',
-        icon: 'icon-user-following'
+        icon: 'icon-user-following',
+        permissions:["user_read", "user_create", "user_update", "user_delete"]
       }
     ]
   },
@@ -121,37 +132,41 @@ export const navItems: INavData[] = [
     name: 'Email',
     url: '/home/email',
     icon: 'icon-envelope',
-    role: ["user_read", "user_create", "user_update", "user_delete"],
     children: [
       {
         name: 'Send Greetings',
         url: '/home/email/email',
-        icon: 'fa fa-commenting-o'
+        icon: 'fa fa-commenting-o',
+        permissions:["send_greeting"]
       },
       {
         name: 'Email Logs',
         url: '/home/email/email-logs',
-        icon: 'fa fa-commenting-o'
+        icon: 'fa fa-commenting-o',
+        permissions:["email_read", "send_mail",]
       },
       {
         name: 'Mail Chimp',
         url: '/home/email/mail-chimp',
         icon: 'fa fa-pencil-square-o',
+        permissions:["mailchimp_config"]
       },
       {
         name: 'Add New Template',
         url: '/home/email/new-email-template',
-        icon: 'fa fa-address-card-o'
+        icon: 'fa fa-address-card-o',
+        permissions:["create_template"]
       },
       {
         name: 'Template List',
         url: '/home/email/template-list',
-        icon: 'fa fa-address-card-o'
+        icon: 'fa fa-address-card-o',
+        permissions:["view_template", "create_template", "update_template", "delete_template"]
       },
       {
         name: 'Edit Template',
         url: '/home/email/template',
-        icon: 'fa fa-address-card-o'
+        icon: 'fa fa-address-card-o',
       }
     ]
   },
@@ -159,22 +174,23 @@ export const navItems: INavData[] = [
     name: "Integration",
     url: '/integration',
     icon: 'fa fa-compress',
-    role: ["user_read", "user_create", "user_update", "user_delete"],
     children: [
       {
         name: 'Mail Integration',
         url: '/home/integration/mail-integration',
-        icon: 'icon-envelope-letter'
+        icon: 'icon-envelope-letter',
+        permissions:["email_read", "send_mail"]
       },
       {
         name: 'Facebook Pixel',
         url: '/home/integration/fb-pixel',
-        icon: 'fa fa-facebook-square'
+        icon: 'fa fa-facebook-square',
       },
       {
         name: 'Sms Integration',
         url: '/home/integration/sms-integration',
-        icon: 'fa fa-comments-o'
+        icon: 'fa fa-comments-o',
+        permissions:["sms_read", "sms_mail"]
       },
     ]
   },
@@ -182,17 +198,18 @@ export const navItems: INavData[] = [
     name: "Sales Trekker",
     url: '/home/loans/add-loan',
     icon: 'fa fa-money',
+
   },
   {
     name: "Loan Logs",
     url: '/home/loans/loan-table',
     icon: 'fa fa-money',
+    permissions:["view_loan"]
   },
   {
     name: 'Setting',
     url: '/setting',
     icon: 'icon-settings',
-    role: ["user_read", "user_create", "user_update", "user_delete"],
     children: [
       {
         name: 'taxonomy',
@@ -202,22 +219,27 @@ export const navItems: INavData[] = [
           {
             name: 'Add Term',
             url: '/home/setting/taxonomy/add-term',
-            icon: 'fa fa-plus-square-o'
+            icon: 'fa fa-plus-square-o',
+            permissions:["add_term"]
           },
           {
             name: 'Tags',
             url: '/home/setting/taxonomy/tags',
-            icon: 'fa fa-plus-square-o'
+            icon: 'fa fa-plus-square-o',
+            permissions:["add_tags", "update_tags", "delete_tags","view_tags"]
           },
           {
             name: 'Term List',
             url: '/home/setting/taxonomy/term-list',
-            icon: 'fa fa-plus-square-o'
+            icon: 'fa fa-plus-square-o',
+            permissions:["add_term", "view_term", "update_term", "delete_term"]
+
           },
           {
             name: 'Social Media',
             url: '/home/setting/taxonomy/social-media',
-            icon: 'fa fa-plus-square-o'
+            icon: 'fa fa-plus-square-o',
+            // permissions:["user_read", "user_create", "user_update", "user_delete"]
           },
         ]
       },
@@ -227,7 +249,6 @@ export const navItems: INavData[] = [
     name: 'Pages',
     url: '/pages',
     icon: 'icon-docs',
-    role: ["user_read", "user_create", "user_update", "user_delete"],
     children: [
       {
         name: 'Register',
@@ -237,22 +258,26 @@ export const navItems: INavData[] = [
       {
         name: 'Login',
         url: '/login',
-        icon: 'icon-login'
+        icon: 'icon-login',
+        // permissions:["user_read", "user_create", "user_update", "user_delete"]
       },
       {
         name: 'Forgot Password',
         url: '/forgotPassword',
-        icon: 'fa fa-key'
+        icon: 'fa fa-key',
+        // permissions:["user_read", "user_create", "user_update", "user_delete"]
       },
       {
         name: 'Error 404',
         url: '/404',
-        icon: 'fa fa-exclamation-circle'
+        icon: 'fa fa-exclamation-circle',
+        // permissions:["user_read", "user_create", "user_update", "user_delete"]
       },
       {
         name: 'Error 500',
         url: '/500',
-        icon: 'fa fa-exclamation-circle'
+        icon: 'fa fa-exclamation-circle',
+        // permissions:["user_read", "user_create", "user_update", "user_delete"]
       }
     ]
   },
